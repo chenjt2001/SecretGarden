@@ -16,14 +16,26 @@ import pymysql
 app = FastAPI()
 
 ################################################################################
-PASSWORD = "917310"
 
-MYSQL_HOST = "127.0.0.1"
-MYSQL_PORT = 3306
-MYSQL_USER = "root"
-MYSQL_PASSWORD = "chenjintao"
-MYSQL_DATABASE = "secretgarden"
-MYSQL_CHARSET="utf8mb4"
+"""
+DROP TABLE IF EXISTS `messages`;
+CREATE TABLE `messages` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `time` bigint(20) DEFAULT NULL,
+  `author` text DEFAULT NULL,
+  `text` longtext DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4;
+"""
+
+PASSWORD = str(os.environ.get('PASSWORD'))
+
+MYSQL_HOST = str(os.environ.get('MYSQL_HOST'))
+MYSQL_PORT = str(os.environ.get('MYSQL_PORT'))
+MYSQL_USER = str(os.environ.get('MYSQL_USER'))
+MYSQL_PASSWORD = str(os.environ.get('MYSQL_PASSWORD'))
+MYSQL_DATABASE = str(os.environ.get('MYSQL_DATABASE'))
+MYSQL_CHARSET= str(os.environ.get('MYSQL_CHARSET'))
 
 #!!!!!!!!!!!!!!!!!!!!!!注意
 #此处的SALT随机生成，在每个进程中不同！因此不能使用多进程服务
