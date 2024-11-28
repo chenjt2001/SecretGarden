@@ -1,0 +1,27 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build Docker image
+      run: docker build . --file Dockerfile --tag secret-garden:latest
+
+    - name: Save Docker image to tar file
+      run: docker save secret-garden:latest -o secret-garden.tar
+
+    - name: Upload tar file as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: docker-image
+        path: secret-garden.tar
