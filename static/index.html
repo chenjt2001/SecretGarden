@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-Hans-CN">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--<link href="https://cdn.jsdelivr.net/npm/daisyui@2.24.0/dist/full.css" rel="stylesheet" type="text/css" />-->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!--<script src="https://github.com/github/fetch/blob/master/fetch.js"></script>-->
+  <script src="assets/js/main.js" defer></script>
+  <link href="assets/css/main.css" rel="stylesheet" type="text/css" />
+  <title>秘密花园</title>
+</head>
+<!--https://wallpaperaccess.com/your-name-anime-->
+
+<body onload="bodyLoad()">
+
+  <template id="my-message">
+    <style>
+      @keyframes fade-in {
+        0% {
+          opacity: 0;
+          /*初始状态 透明度为0*/
+        }
+
+
+        40% {
+          opacity: 0;
+          /*过渡状态 透明度为0*/
+        }
+
+
+        100% {
+          opacity: 1;
+          /*结束状态 透明度为1*/
+        }
+
+
+      }
+
+      @-webkit-keyframes fade-in {
+
+        /*针对webkit内核*/
+        0% {
+          opacity: 0;
+        }
+
+        40% {
+          opacity: 0;
+        }
+
+        100% {
+          opacity: 1;
+        }
+      }
+
+      div {
+        animation: fade-in;
+        /*动画名称*/
+        animation-duration: 1.5s;
+        /*动画持续时间*/
+        -webkit-animation: fade-in 1.5s;
+        /*针对webkit内核*/
+      }
+    </style>
+    <div style="background-color: rgba(255,255,255,0.4); padding: 1rem 1.25rem 1rem 1.25rem;">
+      <p style="margin-top: 0.5rem; font-size: 0.75rem; line-height: 1rem; text-align: start;">
+        <slot name="my-floor">#1</slot>
+      </p>
+      <p>
+        <slot name="my-text">Default text</slot>
+      </p>
+      <p style="margin-top: 0.5rem; font-size: 0.75rem; line-height: 1rem; text-align: end;">
+        <slot name="my-time">2022-11-1 18:45:54</slot>
+      </p>
+    </div>
+  </template>
+
+  <!--背景图-->
+  <div class="h-full w-full bg-fixed bg-cover" style="position:fixed; background-image: url('assets/images/background.png')">
+  </div>
+
+  <!--毛玻璃-->
+  <div id="blurDiv" class="min-h-screen h-full w-full backdrop-filter backdrop-blur-lg flex flex-col">
+
+    <!--标题-->
+    <div class="flex justify-center pt-12">
+      <h1 class="text-4xl" style="font-family: 'My Font'">秘密花园</h1>
+    </div>
+
+    <!--请输入密码-->
+    <div id="passwordDiv" class="flex justify-center items-center flex-col flex-grow pb-10 max-w-full" style="display: none;">
+      <span><span><input id="passwordInput" class="bg-white opacity-50 h-10 rounded-l-lg px-5" type="password"
+            placeholder="请输入密码"></span><span><button id="passwordButton"
+            class="bg-gradient-to-r from-green-400 to-blue-500 h-10 w-20 rounded-r-lg text-white"
+            onclick="enter()">进入</button>
+        </span></span>
+      <p class="text-black opacity-80 pt-2">Tip: 密码是我的生日和你的生日拼在一起，共6位</p>
+    </div>
+
+
+    <!--显示消息的区域-->
+    <div class="flex justify-center items-center flex-col my-16" id="messagesDiv"
+      style="display: none; font-family: 'My Font'">
+
+      <p class="flex justify-center mb-10 text-lg">欢迎来到秘密花园！</p>
+
+      <!--新增消息-->
+      <div class="flex flex-col w-3/4 sm:w-1/2 py-8 px-5 mb-4" style="background-color: rgba(255,255,255,0.4);">
+        <textarea id="newMessageTextarea" rows="5" class="bg-transparent" placeholder="新增留言"></textarea>
+        <div class="flex justify-end mt-2">
+          <input id="authorInput" class="w-40 mr-5 bg-transparent" placeholder="在这里留下你的名称"></input>
+          <button id="publishButton" class="w-20 py-1" style="background-color: rgba(255,255,255,0.4);"
+            onclick="publish()">发布</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
