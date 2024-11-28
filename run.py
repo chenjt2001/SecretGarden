@@ -31,7 +31,7 @@ CREATE TABLE `messages` (
 PASSWORD = str(os.environ.get('PASSWORD'))
 
 MYSQL_HOST = str(os.environ.get('MYSQL_HOST'))
-MYSQL_PORT = str(os.environ.get('MYSQL_PORT'))
+MYSQL_PORT = int(os.environ.get('MYSQL_PORT'))
 MYSQL_USER = str(os.environ.get('MYSQL_USER'))
 MYSQL_PASSWORD = str(os.environ.get('MYSQL_PASSWORD'))
 MYSQL_DATABASE = str(os.environ.get('MYSQL_DATABASE'))
